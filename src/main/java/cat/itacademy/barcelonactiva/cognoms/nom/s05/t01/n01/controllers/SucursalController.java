@@ -1,6 +1,5 @@
 package cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.controllers;
 
-import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.domain.Sucursal;
 import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.dto.SucursalDTO;
 import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.services.SucursalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @RestController
 @RequestMapping("/sucursal")
@@ -35,9 +32,14 @@ public class SucursalController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteSucursal(@PathVariable Integer id) {
-        sucursalService.deleteSucursal(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        boolean isDeleted = sucursalService.deleteSucursal(id);
+        if (isDeleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/getOne/{id}")
@@ -51,13 +53,8 @@ public class SucursalController {
     }
 
     @GetMapping("/getAll")
-     try {
-        Iterable<Sucursal> sucursalIterable = sucursalService.getAllSucursals();
-        List<Sucursal> sucursals = StreamSupport.stream(sucursalIterable.spliterator(), false)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<SucursalDTO>> getAllSucursals() {
+        List<SucursalDTO> sucursals = sucursalService.getAllSucursals();
         return new ResponseEntity<>(sucursals, HttpStatus.OK);
-    } catch (Exception e) {
-        e.printStackTrace();
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

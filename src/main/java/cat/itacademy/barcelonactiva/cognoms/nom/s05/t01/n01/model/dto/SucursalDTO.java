@@ -9,7 +9,6 @@ public class SucursalDTO {
     private String countrySucursal;
     private String typeSucursal;
 
-
     private static final List<String> UE_COUNTRIES = Arrays.asList(
             "Romania", "Sweden", "Germany", "Austria", "Belgium",
             "Cyprus", "Slovakia", "Slovenia", "Spain", "Estonia",
@@ -18,6 +17,13 @@ public class SucursalDTO {
             "Malta", "Poland", "Portugal", "Czech Republic");
 
     public SucursalDTO() {
+        this.typeSucursal = calcTypeSucursal();
+    }
+
+    public SucursalDTO(Integer pkSucursalID, String nameSucursal, String countrySucursal) {
+        this.pkSucursalID = pkSucursalID;
+        this.nameSucursal = nameSucursal;
+        this.countrySucursal = countrySucursal;
         this.typeSucursal = calcTypeSucursal();
     }
 
