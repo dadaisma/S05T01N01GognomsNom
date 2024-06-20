@@ -67,7 +67,21 @@ public class SucursalController {
     }
 
 
+
+        @GetMapping("/form")
+        public String showAddForm(Model model) {
+            model.addAttribute("sucursal", new SucursalDTO());
+            return "add";
+        }
+
+        @PostMapping("/addNew")
+        public String createSucursalAdd(@ModelAttribute("sucursal") SucursalDTO sucursalDTO) {
+            sucursalServiceImpl.createSucursal(sucursalDTO);
+            return "redirect:/sucursal/home";
+        }
     }
+
+
 
 
 

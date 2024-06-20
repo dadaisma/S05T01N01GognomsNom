@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Sucursal</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap-icons.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">My App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/form">Add</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h1 class="entrytitle">Add New Sucursal</h1>
+    <form th:action="@{/sucursal/addNew}" th:object="${sucursal}" method="post">
+        <div class="mb-3">
+            <label for="nameSucursal" class="form-label">Name</label>
+            <input type="text" class="form-control" id="nameSucursal" th:field="*{nameSucursal}" required>
+        </div>
+        <div class="mb-3">
+            <label for="countrySucursal" class="form-label">Country</label>
+            <input type="text" class="form-control" id="countrySucursal" th:field="*{countrySucursal}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Sucursal</button>
+    </form>
+</div>
+
+<script src="/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

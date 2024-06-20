@@ -20,14 +20,14 @@
         /* Styles for the table */
         .table {
             background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for the table */
         }
 
         /* Styles for the title */
         .title, .entrytitle {
             margin-bottom: 20px;
             text-align: center;
-            font-weight: bold;
+            font-weight: bold; /* Corrected to use font-weight */
         }
     </style>
 </head>
@@ -78,12 +78,10 @@
                 <td th:text="${sucursal.typeSucursal}"></td>
                 <td>
                     <!-- Edit button -->
-                    <a th:href="@{/sucursal/edit/{id}(id=${sucursal.pkSucursalID})}" class="btn btn-primary btn-sm">Edit</a>
-                    <!-- Delete button -->
-                    <form th:action="@{/sucursal/delete/{id}(id=${sucursal.pkSucursalID})}" method="post"
-                          style="display: inline;">
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+                    <a th:href="@{/sucursal/edit/{id}(id=${sucursal.pkSucursalID})}" class="btn btn-primary btn-sm me-1">Edit</a>
+                    <!-- Delete button  -->
+                    <button type="button" class="btn btn-danger btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${sucursal.pkSucursalID}">Delete</button>
+
                 </td>
             </tr>
             </tbody>
@@ -91,8 +89,42 @@
     </div>
 </div>
 
-<!-- Bootstrap JavaScript Bundle with Popper -->
+<!-- Modal HTML -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this item?
+            </div>
+            <div class="modal-footer">
+                <!--
+                                <form id="modalDeleteForm" th:action="" method="post">
+                                    <input type="hidden" name="_method" value="delete"/>
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bootstrap JavaScript Bundle with Popper -->
 <script src="/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<!--
+<script>
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+        var sucursalId = button.getAttribute('data-id'); // Extract info from data-* attributes
+        var form = document.getElementById('modalDeleteForm');
+        form.action = '/sucursal/delete/' + sucursalId;
+    });
+</script>
+-->
 <!-- Optional: Your custom JavaScript -->
 <script src="/js/custom.js"></script>
 </body>
