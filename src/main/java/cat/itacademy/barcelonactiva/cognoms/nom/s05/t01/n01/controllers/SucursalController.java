@@ -1,30 +1,33 @@
 package cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.controllers;
 
 import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.dto.SucursalDTO;
-import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.services.SucursalService;
+import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.services.SucursalServiceImpl;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/sucursal")
 public class SucursalController {
 
     @Autowired
-    private SucursalService sucursalService;
+    private SucursalServiceImpl sucursalServiceImpl;
 
     @PostMapping("/add")
     public ResponseEntity<SucursalDTO> createSucursal(@RequestBody SucursalDTO sucursalDTO) {
-        SucursalDTO sucursalCreated = sucursalService.createSucursal(sucursalDTO);
+        SucursalDTO sucursalCreated = sucursalServiceImpl.createSucursal(sucursalDTO);
         return new ResponseEntity<>(sucursalCreated, HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<SucursalDTO> updateSucursal(@PathVariable Integer id, @RequestBody SucursalDTO sucursalDTO) {
-        SucursalDTO sucursalUpdated = sucursalService.updateSucursal(id, sucursalDTO);
+        SucursalDTO sucursalUpdated = sucursalServiceImpl.updateSucursal(id, sucursalDTO);
         if (sucursalUpdated != null) {
             return new ResponseEntity<>(sucursalUpdated, HttpStatus.OK);
         } else {
@@ -34,7 +37,7 @@ public class SucursalController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteSucursal(@PathVariable Integer id) {
-        boolean isDeleted = sucursalService.deleteSucursal(id);
+        boolean isDeleted = sucursalServiceImpl.deleteSucursal(id);
         if (isDeleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -44,7 +47,7 @@ public class SucursalController {
 
     @GetMapping("/getOne/{id}")
     public ResponseEntity<SucursalDTO> getSucursalById(@PathVariable Integer id) {
-        SucursalDTO sucursalRequestedById = sucursalService.getSucursalById(id);
+        SucursalDTO sucursalRequestedById = sucursalServiceImpl.getSucursalById(id);
         if (sucursalRequestedById != null) {
             return new ResponseEntity<>(sucursalRequestedById, HttpStatus.OK);
         } else {
@@ -54,7 +57,21 @@ public class SucursalController {
 
     @GetMapping("/getAll")
     public ResponseEntity<List<SucursalDTO>> getAllSucursals() {
-        List<SucursalDTO> sucursals = sucursalService.getAllSucursals();
+        List<SucursalDTO> sucursals = sucursalServiceImpl.getAllSucursals();
         return new ResponseEntity<>(sucursals, HttpStatus.OK);
     }
-}
+    @GetMapping("/home")
+    public  String homePage(Model model) {
+        model.addAttribute("sucursals", sucursalServiceImpl.getAllSucursals());
+        return "Home";
+    }
+
+
+    }
+
+
+
+
+
+
+

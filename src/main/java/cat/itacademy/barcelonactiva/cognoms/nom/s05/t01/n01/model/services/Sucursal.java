@@ -4,7 +4,7 @@ import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.dto.SucursalDT
 
 import java.util.List;
 
-public interface Isucursal {
+public interface Sucursal {
 
     SucursalDTO createSucursal(SucursalDTO sucursalDTO);
 
