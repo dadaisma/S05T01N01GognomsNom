@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <style>
         /* Styles for the navbar */
         .navbar-expand-lg {
@@ -29,6 +30,48 @@
             text-align: center;
             font-weight: bold; /* Corrected to use font-weight */
         }
+
+        .inputfield {
+          display: flex;
+            flex-direction: row;
+        justify-content: center;
+        align-items:center;
+        }
+           .addfield {
+          display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items:center;
+
+        }
+
+            .addfield a {
+            text-decoration: none; /* Remove underline from link */
+            color: black; /* Set default text color */
+            display: flex;
+            align-items: center;
+                gap: 15px;
+        }
+
+
+
+               .addfield a:hover i.bi.bi-plus-circle {
+            color: green;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .addfield a:hover p {
+            color: green;
+          font-weight: bold;
+          font-size: 16px;
+        }
+
+        .addfield a i.bi.bi-plus-circle {
+    margin-left: 8px;
+}
+
+
     </style>
 </head>
 
@@ -57,7 +100,20 @@
 </nav>
 
 <div class="container mt-4">
-    <h1 class="entrytitle">Are you UE or Not?</h1>
+    <h1 class="entrytitle">Sucursales</h1>
+
+    <div class="addfield input-group mb-1">
+        <a href="/sucursal/form">
+        <i class="bi bi-plus-circle"></i>
+        <p class="mb-0  ms-1">Add new</p>
+        </a>
+
+    </div>
+    <div class="inputfield input-group mb-3">
+        <span class="input-group-text bg-white border-0"><i class="bi bi-search"></i></span>
+        <input type="text" class="form-control border-rounded" placeholder="Search sucursal" aria-label="Search sucursal">
+
+    </div>
     <div class="table-responsive">
         <table class="table table-bordered text-center">
             <thead class="table-light">
@@ -78,9 +134,13 @@
                 <td th:text="${sucursal.typeSucursal}"></td>
                 <td>
                     <!-- Edit button -->
-                    <a th:href="@{/sucursal/edit/{id}(id=${sucursal.pkSucursalID})}" class="btn btn-primary btn-sm me-1">Edit</a>
+                    <a th:href="@{/sucursal/edit/{id}(id=${sucursal.pkSucursalID})}" class="btn btn-primary btn-sm me-1">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
                     <!-- Delete button  -->
-                    <button type="button" class="btn btn-danger btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${sucursal.pkSucursalID}">Delete</button>
+                    <button type="button" class="btn btn-danger btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#deleteModal" th:data-id="${sucursal.pkSucursalID}">
+                        <i class="bi bi-trash"></i>
+                    </button>
 
                 </td>
             </tr>
