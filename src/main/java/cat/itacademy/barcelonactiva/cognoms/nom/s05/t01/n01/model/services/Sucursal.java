@@ -15,5 +15,7 @@ public interface Sucursal {
     SucursalDTO getSucursalById(Integer id);
 
     List<SucursalDTO> getAllSucursals();
+
+
 }
 

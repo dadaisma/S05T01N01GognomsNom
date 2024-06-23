@@ -24,8 +24,6 @@ public class Sucursal {
         this.countrySucursal = countrySucursal;
     }
 
-
-
     public int getPkSucursalId() {
         return pkSucursalId;
     }

@@ -19,11 +19,15 @@ public class SucursalController {
     @Autowired
     private SucursalServiceImpl sucursalServiceImpl;
 
+    // add 1 in api
+
     @PostMapping("/add")
     public ResponseEntity<SucursalDTO> createSucursal(@RequestBody SucursalDTO sucursalDTO) {
         SucursalDTO sucursalCreated = sucursalServiceImpl.createSucursal(sucursalDTO);
         return new ResponseEntity<>(sucursalCreated, HttpStatus.CREATED);
     }
+
+    // edit 1 in api
 
     @PutMapping("/update/{id}")
     public ResponseEntity<SucursalDTO> updateSucursal(@PathVariable Integer id, @RequestBody SucursalDTO sucursalDTO) {
@@ -35,6 +39,8 @@ public class SucursalController {
         }
     }
 
+    // del 1 in api
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteSucursal(@PathVariable Integer id) {
         boolean isDeleted = sucursalServiceImpl.deleteSucursal(id);
@@ -44,6 +50,8 @@ public class SucursalController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    // get 1 in api
 
     @GetMapping("/getOne/{id}")
     public ResponseEntity<SucursalDTO> getSucursalById(@PathVariable Integer id) {
@@ -55,6 +63,8 @@ public class SucursalController {
         }
     }
 
+    // get all in web
+
     @GetMapping("/getAll")
     public ResponseEntity<List<SucursalDTO>> getAllSucursals() {
         List<SucursalDTO> sucursals = sucursalServiceImpl.getAllSucursals();
@@ -63,10 +73,12 @@ public class SucursalController {
     @GetMapping("/")
     public  String homePage(Model model) {
         model.addAttribute("sucursals", sucursalServiceImpl.getAllSucursals());
-        return "Home";
+        return "/home";
     }
 
 
+
+    // add new in web
 
         @GetMapping("/form")
         public String showAddForm(Model model) {
@@ -79,7 +91,44 @@ public class SucursalController {
             sucursalServiceImpl.createSucursal(sucursalDTO);
             return "redirect:/";
         }
+
+        //
+
+    // edit one in web
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        SucursalDTO sucursal = sucursalServiceImpl.getSucursalById(id);
+        model.addAttribute("sucursal", sucursal);
+        return "edit";
     }
+
+    @PostMapping("/editone/{id}")
+    public String updateSucursalEdit(@PathVariable Integer id, @ModelAttribute("sucursal") SucursalDTO sucursalDTO) {
+        sucursalServiceImpl.updateSucursal(id, sucursalDTO);
+        return "redirect:/";
+    }
+//
+
+
+
+
+    // delete one in web
+
+    @PostMapping("/delete/{id}")
+    public String deleteSucursalForm(@PathVariable(value="id") Integer id){
+        sucursalServiceImpl.deleteSucursal(id);
+        return "redirect:/";
+    }
+
+
+    }
+
+
+
+
+
+
 
 
 

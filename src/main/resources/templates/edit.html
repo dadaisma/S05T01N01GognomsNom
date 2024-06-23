@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Sucursal</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.0/css/bootstrap-icons.min.css">
+    <style>
+
+
+        .center-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title, .entrytitle {
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .btn-back {
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: darkorange;
+            color: white;
+        }
+
+        .btns {
+            display: flex;
+
+            align-items: center; /* Align items vertically */
+            margin-top: 20px; /* Adjust margin between form and buttons */
+        }
+
+        .formdiv {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #ddd; /* Border color */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            padding: 20px; /* Padding inside the container */
+            margin-top: 20px; /* Space from top */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-box">
+    <div class="container mt-4">
+
+        <h1 class="entrytitle">Filtered</h1>
+        <div class="formdiv">
+            <!-- Ensure the method is PUT and action is correctly mapped -->
+            <form th:action="@{/editone/{id}(id=${sucursal.pkSucursalID})}" th:object="${sucursal}" th:method="put" class="center-form">
+                <div class="mb-3">
+                    <label for="nameSucursal" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="nameSucursal" th:field="*{nameSucursal}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="countrySucursal" class="form-label">Country</label>
+                    <input type="text" class="form-control" id="countrySucursal" th:field="*{countrySucursal}" required>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Save</button>
+            </form>
+        </div>
+
+        <div class="btns">
+            <a href="/" class="text-decoration-none">
+                <button class="btn btn-back">Back</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script src="/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

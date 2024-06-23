@@ -64,4 +64,8 @@ public class SucursalServiceImpl implements Sucursal {
         return StreamSupport.stream(sucursals.spliterator(), false)
                 .map(s -> new SucursalDTO(s.getPkSucursalId(), s.getNameSucursal(), s.getCountrySucursal()))
                 .collect(Collectors.toList());
-    }}
+    }
+
+
+
+}

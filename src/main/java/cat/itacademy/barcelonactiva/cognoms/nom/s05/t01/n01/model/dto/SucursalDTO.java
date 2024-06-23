@@ -1,7 +1,9 @@
 package cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.dto;
 
+
 import java.util.Arrays;
 import java.util.List;
+
 
 public class SucursalDTO {
     private Integer pkSucursalID;
