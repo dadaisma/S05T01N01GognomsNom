@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sucursal")
+@RequestMapping("/")
 public class SucursalController {
 
     @Autowired
@@ -60,7 +60,7 @@ public class SucursalController {
         List<SucursalDTO> sucursals = sucursalServiceImpl.getAllSucursals();
         return new ResponseEntity<>(sucursals, HttpStatus.OK);
     }
-    @GetMapping("/home")
+    @GetMapping("/")
     public  String homePage(Model model) {
         model.addAttribute("sucursals", sucursalServiceImpl.getAllSucursals());
         return "Home";
@@ -77,7 +77,7 @@ public class SucursalController {
         @PostMapping("/addNew")
         public String createSucursalAdd(@ModelAttribute("sucursal") SucursalDTO sucursalDTO) {
             sucursalServiceImpl.createSucursal(sucursalDTO);
-            return "redirect:/sucursal/home";
+            return "redirect:/";
         }
     }
 
