@@ -21,31 +21,31 @@ public class SucursalController {
     private SucursalServiceImpl sucursalServiceImpl;
 
 
-    @GetMapping("/")
+    @GetMapping({"/", "/sucursal/getAll"})
     public  String homePage(Model model) {
         model.addAttribute("sucursals", sucursalServiceImpl.getAllSucursals());
         return "/home";
     }
 
-        @GetMapping("/form")
+        @GetMapping({"/form", "/sucursal/add"})
         public String showAddForm(Model model) {
             model.addAttribute("sucursal", new SucursalDTO());
             return "add";
         }
 
-        @PostMapping("/addNew")
+        @PostMapping({"/addNew"})
         public String createSucursalAdd(@ModelAttribute("sucursal") SucursalDTO sucursalDTO) {
           sucursalServiceImpl.createSucursal(sucursalDTO);
             return "redirect:/";
         }
 
-        @GetMapping("/edit/{id}")
+        @GetMapping({"/edit/{id}", "/sucursal/getOne/{id}"})
         public String showEditForm(@PathVariable(value="id") Integer id, Model model) {
         model.addAttribute("sucursal", sucursalServiceImpl.getSucursalById(id));
         return "edit";
          }
 
-        @PostMapping("/editone/{id}")
+        @PostMapping({"/editone/{id}"})
 
         public String updateSucursalEdit(@PathVariable("id") Integer id, @ModelAttribute("sucursal") SucursalDTO sucursalDTO, Model model) {
         try {
@@ -58,7 +58,7 @@ public class SucursalController {
         }
         }
 
-        @PostMapping("/delete/{id}")
+        @PostMapping({"/delete/{id}"})
         public String deleteSucursalForm(@PathVariable(value="id") Integer id){
         sucursalServiceImpl.deleteSucursal(id);
         return "redirect:/";
