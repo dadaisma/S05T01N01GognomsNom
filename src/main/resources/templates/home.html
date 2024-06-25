@@ -71,6 +71,23 @@
     margin-left: 8px;
 }
 
+                .btn-add {
+            display: flex;
+            align-items: center;
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-add:hover {
+            background-color: darkorange;
+            color: white;
+        }
+
 
     </style>
 </head>
@@ -81,10 +98,13 @@
 <div class="container mt-4">
     <h1 class="entrytitle">Sucursales</h1>
 
-    <div class="addfield input-group mb-1">
-        <a href="/form">
-        <i class="bi bi-plus-circle"></i>
-        <p class="mb-0  ms-1">Add new</p>
+    <div class="input-group mb-1">
+        <a href="/form" class="text-decoration-none">
+            <button class="btn-add">
+                <i class="bi bi-plus-circle"></i>
+                <p class="mb-0  ms-1">Add new</p>
+            </button>
+
         </a>
 
     </div>
