@@ -10,12 +10,13 @@ public class Sucursal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pkSucursalId;
+    private Integer pkSucursalId;
     private String nameSucursal;
     private String countrySucursal;
 
     // Default constructor
-    public Sucursal() {
+    public Sucursal(){}
+    public Sucursal(Integer pkSucursalID, String nameSucursal, String countrySucursal) {
     }
 
     // Parameterized constructor
@@ -24,11 +25,11 @@ public class Sucursal {
         this.countrySucursal = countrySucursal;
     }
 
-    public int getPkSucursalId() {
+    public Integer getPkSucursalId() {
         return pkSucursalId;
     }
 
-    public void setPkSucursalId(int pkSucursalId) {
+    public void setPkSucursalId(Integer pkSucursalId) {
         this.pkSucursalId = pkSucursalId;
     }
 

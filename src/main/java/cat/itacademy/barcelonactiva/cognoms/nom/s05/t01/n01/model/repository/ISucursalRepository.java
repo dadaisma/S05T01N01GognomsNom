@@ -2,9 +2,9 @@ package cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.repository;
 
 import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.domain.Sucursal;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface SucursalRepository extends JpaRepository < Sucursal,Integer> {
+@Repository
+public interface ISucursalRepository extends JpaRepository < Sucursal,Integer> {
 
 }

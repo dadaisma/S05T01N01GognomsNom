@@ -1,14 +1,18 @@
 package cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.services;
 
 import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.dto.SucursalDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface Sucursal {
 
-    SucursalDTO createSucursal(SucursalDTO sucursalDTO);
+public interface ISucursal {
 
-    SucursalDTO updateSucursal(Integer id, SucursalDTO sucursalDTO);
+    void createSucursal(SucursalDTO sucursalDTO);
+
+    @Transactional
+    void updateSucursal(SucursalDTO sucursalDTO);
 
     boolean deleteSucursal(Integer id);
 
