@@ -62,7 +62,8 @@
         <h1 class="entrytitle">Filtered</h1>
         <div class="formdiv">
             <!-- Ensure the method is PUT and action is correctly mapped -->
-            <form th:action="@{/editone/{id}(id=${sucursal.pkSucursalID})}" th:object="${sucursal}" th:method="put" class="center-form">
+            <form th:action="@{/editone/{id}(id=${sucursal.pkSucursalID})}" th:object="${sucursal}" method="post" class="center-form">
+                <input type="hidden" th:field="*{pkSucursalID}" />
                 <div class="mb-3">
                     <label for="nameSucursal" class="form-label">Name</label>
                     <input type="text" class="form-control" id="nameSucursal" th:field="*{nameSucursal}" required>

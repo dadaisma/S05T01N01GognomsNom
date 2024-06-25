@@ -21,17 +21,11 @@ public class SucursalController {
     private SucursalServiceImpl sucursalServiceImpl;
 
 
-    // get all in web
-
-
     @GetMapping("/")
     public  String homePage(Model model) {
         model.addAttribute("sucursals", sucursalServiceImpl.getAllSucursals());
         return "/home";
     }
-
-
-    // add new in web
 
         @GetMapping("/form")
         public String showAddForm(Model model) {
@@ -45,41 +39,30 @@ public class SucursalController {
             return "redirect:/";
         }
 
-        //
-
-    // edit one in web
-
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable(value="id") Integer id, Model model) {
+        @GetMapping("/edit/{id}")
+        public String showEditForm(@PathVariable(value="id") Integer id, Model model) {
         model.addAttribute("sucursal", sucursalServiceImpl.getSucursalById(id));
         return "edit";
-    }
+         }
 
-    @PostMapping("/editone/{id}")
+        @PostMapping("/editone/{id}")
 
-        public String updateSucursalEdit(@ModelAttribute("sucursalToUpdate") SucursalDTO sucursalDTO, Model model){
+        public String updateSucursalEdit(@PathVariable("id") Integer id, @ModelAttribute("sucursal") SucursalDTO sucursalDTO, Model model) {
         try {
-            sucursalServiceImpl.updateSucursal(sucursalDTO);
+            sucursalDTO.setPkSucursalID(id); // Set the ID from path variable
+            sucursalServiceImpl.updateSucursal(sucursalDTO); // Update the SucursalDTO
             return "redirect:/"; // Redirect on success
         } catch (EntityNotFoundException e) {
-
             model.addAttribute("errorMessage", e.getMessage());
-            return "edit";
+            return "edit"; // Return to edit page with error message
         }
-    }
+        }
 
-//
-
-
-
-
-    // delete one in web
-
-    @PostMapping("/delete/{id}")
-    public String deleteSucursalForm(@PathVariable(value="id") Integer id){
+        @PostMapping("/delete/{id}")
+        public String deleteSucursalForm(@PathVariable(value="id") Integer id){
         sucursalServiceImpl.deleteSucursal(id);
         return "redirect:/";
-    }
+        }
 
 
     }

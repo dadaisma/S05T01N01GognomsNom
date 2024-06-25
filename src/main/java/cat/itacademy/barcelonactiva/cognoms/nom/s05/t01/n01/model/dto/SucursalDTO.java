@@ -19,6 +19,14 @@ public class SucursalDTO {
             "Malta", "Poland", "Portugal", "Czech Republic");
 
     public SucursalDTO() {
+
+    }
+
+
+    public SucursalDTO( String nameSucursal, String countrySucursal) {
+
+        this.nameSucursal = nameSucursal;
+        this.countrySucursal = countrySucursal;
         this.typeSucursal = calcTypeSucursal();
     }
 

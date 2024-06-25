@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.domain.Sucursal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -41,13 +42,22 @@ public class SucursalServiceImpl implements ISucursal {
     @Override
     @Transactional
     public void updateSucursal(SucursalDTO sucursalDTO) {
-        if(!iSucursalRepository.findById(sucursalDTO.getPkSucursalID()).isPresent()){
-            throw new EntityNotFoundException("Update Sucursal Failed: Invalid ID: "+ sucursalDTO.getPkSucursalID()+
+        Optional<Sucursal> existingSucursalOptional = iSucursalRepository.findById(sucursalDTO.getPkSucursalID());
+
+        if (!existingSucursalOptional.isPresent()) {
+            throw new EntityNotFoundException("Update Sucursal Failed: Invalid ID: " + sucursalDTO.getPkSucursalID() +
                     " -> DOESN'T EXIST in DataBase");
         }
 
-        iSucursalRepository.save(toEntity(sucursalDTO));
+        // If the entity exists, proceed with updating its fields
+        Sucursal existingSucursal = existingSucursalOptional.get();
+        existingSucursal.setNameSucursal(sucursalDTO.getNameSucursal());
+        existingSucursal.setCountrySucursal(sucursalDTO.getCountrySucursal());
+
+        // Save the updated entity back to the repository
+        iSucursalRepository.save(existingSucursal);
     }
+
     @Override
     @Transactional
     public boolean deleteSucursal(Integer sucursalId) {
