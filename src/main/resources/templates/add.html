@@ -61,7 +61,7 @@
 
         <h1 class="entrytitle">Add New Sucursal</h1>
         <div class="formdiv">
-            <form th:action="@{/addNew}" th:object="${sucursal}" method="post" class="center-form">
+            <form th:action="@{/sucursal/add}" th:object="${sucursal}" method="post" class="center-form">
                 <div class="mb-3">
                     <label for="nameSucursal" class="form-label">Name</label>
                     <input type="text" class="form-control" id="nameSucursal" th:field="*{nameSucursal}" required>
@@ -78,7 +78,7 @@
 
         </div>
         <div class="btns">
-            <a href="/" class="text-decoration-none">
+            <a href="/sucursal/" class="text-decoration-none">
                 <button class="btn btn-back">Back</button>
             </a>
         </div>

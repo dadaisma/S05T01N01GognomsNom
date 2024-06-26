@@ -14,44 +14,44 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/sucursal")
 public class SucursalController {
 
     @Autowired
     private SucursalServiceImpl sucursalServiceImpl;
 
 
-    @GetMapping({"/", "/sucursal/getAll"})
+    @GetMapping({"/", "/getAll"})
     public  String homePage(Model model) {
         model.addAttribute("sucursals", sucursalServiceImpl.getAllSucursals());
         return "/home";
     }
 
-        @GetMapping({"/form", "/sucursal/add"})
+        @GetMapping({"/form", "/add"})
         public String showAddForm(Model model) {
             model.addAttribute("sucursal", new SucursalDTO());
             return "add";
         }
 
-        @PostMapping({"/addNew"})
+        @PostMapping({"/addNew", "/add"})
         public String createSucursalAdd(@ModelAttribute("sucursal") SucursalDTO sucursalDTO) {
           sucursalServiceImpl.createSucursal(sucursalDTO);
-            return "redirect:/";
+            return "redirect:/sucursal/";
         }
 
-        @GetMapping({"/edit/{id}", "/sucursal/getOne/{id}"})
+        @GetMapping({"/edit/{id}", "/getOne/{id}"})
         public String showEditForm(@PathVariable(value="id") Integer id, Model model) {
         model.addAttribute("sucursal", sucursalServiceImpl.getSucursalById(id));
         return "edit";
          }
 
-        @PostMapping({"/editone/{id}"})
+        @PostMapping({"/editone/{id}", "/update/{id}"})
 
         public String updateSucursalEdit(@PathVariable("id") Integer id, @ModelAttribute("sucursal") SucursalDTO sucursalDTO, Model model) {
         try {
             sucursalDTO.setPkSucursalID(id); // Set the ID from path variable
             sucursalServiceImpl.updateSucursal(sucursalDTO); // Update the SucursalDTO
-            return "redirect:/"; // Redirect on success
+            return "redirect:/sucursal/"; // Redirect on success
         } catch (EntityNotFoundException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "edit"; // Return to edit page with error message
@@ -61,7 +61,7 @@ public class SucursalController {
         @PostMapping({"/delete/{id}"})
         public String deleteSucursalForm(@PathVariable(value="id") Integer id){
         sucursalServiceImpl.deleteSucursal(id);
-        return "redirect:/";
+        return "redirect:/sucursal/";
         }
 
 

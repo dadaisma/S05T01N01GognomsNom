@@ -11,7 +11,7 @@ import cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.domain.Sucursa
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
+
 
 @Service
 public class SucursalServiceImpl implements ISucursal {
@@ -54,7 +54,7 @@ public class SucursalServiceImpl implements ISucursal {
         existingSucursal.setNameSucursal(sucursalDTO.getNameSucursal());
         existingSucursal.setCountrySucursal(sucursalDTO.getCountrySucursal());
 
-        // Save the updated entity back to the repository
+
         iSucursalRepository.save(existingSucursal);
     }
 
@@ -88,14 +88,5 @@ public class SucursalServiceImpl implements ISucursal {
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
- /*
-    @Override
-    @Transactional(readOnly = true)
-    public List<SucursalDTO> getAllSucursals() {
-        Iterable<cat.itacademy.barcelonactiva.cognoms.nom.s05.t01.n01.model.domain.Sucursal> sucursals = iSucursalRepository.findAll();
-        return StreamSupport.stream(sucursals.spliterator(), false)
-                .map(s -> new SucursalDTO(s.getPkSucursalId(), s.getNameSucursal(), s.getCountrySucursal()))
-                .collect(Collectors.toList());
-    }
-*/
+
 }
